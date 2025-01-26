@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { QRCodeSVG } from "qrcode.react"; // Default import
-import { jsPDF } from "jspdf"; // Library to generate PDFs
+import { QRCodeSVG } from "qrcode.react";
+import { jsPDF } from "jspdf";
 
 const Apply = () => {
   const location = useLocation();
@@ -22,7 +22,7 @@ const Apply = () => {
     subCategory: subCategory || "",
   });
 
-  const [receiptData, setReceiptData] = useState(null); // For displaying slip
+  const [receiptData, setReceiptData] = useState(null);
 
   const handleChange = (e) => {
     setFormData({
@@ -35,17 +35,17 @@ const Apply = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/api/loan", {
+      const response = await fetch("https://saylani-final-hackathon-backend.vercel.app/api/loan", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
       if (response.ok) {
-        const data = await response.json(); // Assuming API returns the UID and appointment details
-        const { uid, appointmentDetails } = data; // Example response fields
+        const data = await response.json();
+        const { uid, appointmentDetails } = data;
 
-        // Store receipt data
+
         setReceiptData({
           token: uid,
           name: formData.name,
@@ -56,7 +56,7 @@ const Apply = () => {
         });
 
         // Send appointment details to the backend
-        await fetch("http://localhost:5000/api/appointments", {
+        await fetch("https://saylani-final-hackathon-backend.vercel.app/api/appointments", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -79,7 +79,6 @@ const Apply = () => {
   const handleDownloadSlip = () => {
     const doc = new jsPDF();
 
-    // Generate PDF content
     doc.setFontSize(16);
     doc.text("Loan Application Receipt", 20, 20);
     doc.setFontSize(12);

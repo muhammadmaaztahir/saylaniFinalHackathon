@@ -13,7 +13,7 @@ const CheckStatus = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:5000/api/loan/status/${cnic}`);
+      const response = await fetch(`https://saylani-final-hackathon-backend.vercel.app/api/loan/status/${cnic}`);
       const data = await response.json();
       
       if (response.ok) {

@@ -32,7 +32,7 @@ const AdminDashboard = () => {
 
   const fetchApplications = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/admin/applications', {
+      const response = await fetch('https://saylani-final-hackathon-backend.vercel.app/api/admin/applications', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -48,7 +48,7 @@ const AdminDashboard = () => {
 
   const handleStatusUpdate = async (id: string, status: string) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/applications/${id}`, {
+      const response = await fetch(`https://saylani-final-hackathon-backend.vercel.app/api/admin/applications/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
